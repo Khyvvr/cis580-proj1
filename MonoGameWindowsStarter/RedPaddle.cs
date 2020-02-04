@@ -18,6 +18,11 @@ namespace MonoGameWindowsStarter
 
         BoundingRectangle boundary;
 
+        public BoundingRectangle GetBoundary()
+        {
+            return boundary;
+        }
+
         /// <summary>
         /// Creates a paddle
         /// </summary>

@@ -17,6 +17,7 @@ namespace MonoGameWindowsStarter
         Vector2 puckVel;
         SpriteBatch spriteBatch;
         Random random = new Random();
+        Collisions collisions = new Collisions();
 
         BoundingRectangle boundary;
 
@@ -50,7 +51,25 @@ namespace MonoGameWindowsStarter
             boundary.X = puckPos.X;
             boundary.Y = puckPos.Y;
 
-            //if (collidesWith(boundary, other) then puckVel -= 1
+            // handles collision for paddles
+            if (collisions.Collides(boundary, game.bluePaddle1.GetBoundary()))
+                puckVel *= -1;
+
+            if (collisions.Collides(boundary, game.bluePaddle2.GetBoundary()))
+                puckVel *= -1;
+
+            if (collisions.Collides(boundary, game.bluePaddle3.GetBoundary()))
+                puckVel *= -1;
+
+            if (collisions.Collides(boundary, game.redPaddle1.GetBoundary()))
+                puckVel *= -1;
+
+            if (collisions.Collides(boundary, game.redPaddle2.GetBoundary()))
+                puckVel *= -1;
+
+            if (collisions.Collides(boundary, game.redPaddle3.GetBoundary()))
+                puckVel *= -1;
+
 
             // check for wall collisions
             if (puckPos.Y < 0)

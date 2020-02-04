@@ -15,8 +15,12 @@ namespace MonoGameWindowsStarter
         Game1 game;
         Texture2D texture;
         SpriteBatch spriteBatch;
-
         BoundingRectangle boundary;
+
+        public BoundingRectangle GetBoundary()
+        {
+            return boundary;
+        }
 
         /// <summary>
         /// Creates a paddle
