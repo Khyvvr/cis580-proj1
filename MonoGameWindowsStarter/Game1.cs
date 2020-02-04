@@ -13,15 +13,17 @@ namespace MonoGameWindowsStarter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        BluePaddle bluePaddle1 = new BluePaddle(this);
-        BluePaddle bluePaddle2 = new BluePaddle(this);
-        BluePaddle bluePaddle3 = new BluePaddle(this);
+        public Puck puck;
 
-        RedPaddle redPaddle1 = new RedPaddle(this);
-        RedPaddle redPaddle2 = new RedPaddle(this);
-        RedPaddle redPaddle3 = new RedPaddle(this);
+        public BluePaddle bluePaddle1;
+        public BluePaddle bluePaddle2;
+        public BluePaddle bluePaddle3;
 
-        Puck puck = new Puck(this);
+        public RedPaddle redPaddle1;
+        public RedPaddle redPaddle2;
+        public RedPaddle redPaddle3;
+
+        Texture2D background;
 
         public Game1()
         {
@@ -42,8 +44,15 @@ namespace MonoGameWindowsStarter
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
 
-            //set all three paddles initial position
-             
+            bluePaddle1 = new BluePaddle(this, 175, 75);
+            bluePaddle2 = new BluePaddle(this, 175, 725);
+            bluePaddle3 = new BluePaddle(this, 600, 350);
+
+            redPaddle1 = new RedPaddle(this, 1425, 75);
+            redPaddle2 = new RedPaddle(this, 1425, 725);
+            redPaddle3 = new RedPaddle(this, 950, 350);
+
+            puck = new Puck(this);
 
             base.Initialize();
         }
@@ -58,6 +67,18 @@ namespace MonoGameWindowsStarter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            background = Content.Load<Texture2D>("background");
+
+            puck.LoadContent(Content);
+
+            bluePaddle1.LoadContent(Content);
+            bluePaddle2.LoadContent(Content);
+            bluePaddle3.LoadContent(Content);
+
+            redPaddle1.LoadContent(Content);
+            redPaddle2.LoadContent(Content);
+            redPaddle3.LoadContent(Content);
+
         }
 
         /// <summary>
@@ -80,6 +101,16 @@ namespace MonoGameWindowsStarter
                 Exit();
 
             // TODO: Add your update logic here
+            puck.Update(gameTime);
+
+            bluePaddle1.Update(gameTime);
+            bluePaddle2.Update(gameTime);
+            bluePaddle3.Update(gameTime);
+
+            redPaddle1.Update(gameTime);
+            redPaddle2.Update(gameTime);
+            redPaddle3.Update(gameTime);
+
             // Scoring with boundary rectangle??
 
             base.Update(gameTime);
@@ -91,9 +122,22 @@ namespace MonoGameWindowsStarter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            puck.Draw();
+
+            bluePaddle1.Draw();
+            bluePaddle2.Draw();
+            bluePaddle3.Draw();
+
+            redPaddle1.Draw();
+            redPaddle2.Draw();
+            redPaddle3.Draw();
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

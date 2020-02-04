@@ -13,6 +13,7 @@ namespace MonoGameWindowsStarter
     {
         Game1 game;
         Texture2D texture;
+        Vector2 puckPos = Vector2.Zero;
         Vector2 puckVel;
         SpriteBatch spriteBatch;
         Random random = new Random();
@@ -43,40 +44,45 @@ namespace MonoGameWindowsStarter
 
         public void Update (GameTime gameTime)
         {
-            // if statements to determine collision - now figure out scoring(maybe in main)
-            if (boundary.Y < 0)
+            puckPos += (float) gameTime.ElapsedGameTime.TotalMilliseconds * 8 * puckVel;
+
+            // check for wall collisions
+            if (puckPos.Y < 0)
             {
                 puckVel.Y *= -1;
-                float delta = 0 - boundary.Y;
-                boundary.Y += 2 * delta;
+                float delta = 0 - puckPos.Y;
+                puckPos.Y += 2 * delta;
             }
 
-            if (boundary.Y > game.GraphicsDevice.Viewport.Height - 40)
+            if (puckPos.Y > game.GraphicsDevice.Viewport.Height - 100)
             {
                 puckVel.Y *= -1;
-                float delta = game.GraphicsDevice.Viewport.Height - 40 - boundary.Y;
-                boundary.Y += 2 * delta;
+                float delta = game.GraphicsDevice.Viewport.Height - 100 - puckPos.Y;
+                puckPos.Y += 2 * delta;
 
             }
 
-            if (boundary.X < 0)
+            if (puckPos.X < 0)
             {
                 puckVel.X *= -1;
-                float delta = 0 - boundary.X;
-                boundary.X += 2 * delta;
+                float delta = 0 - puckPos.X;
+                puckPos.X += 2 * delta;
             }
 
-            if (boundary.X > game.GraphicsDevice.Viewport.Width - 50)
+            if (puckPos.X > game.GraphicsDevice.Viewport.Width - 100)
             {
                 puckVel.X *= -1;
-                float delta = game.GraphicsDevice.Viewport.Width - 50 - boundary.X;
-                boundary.X += 2 * delta;
+                float delta = game.GraphicsDevice.Viewport.Width - 100 - puckPos.X;
+                puckPos.X += 2 * delta;
             }
+
         }
 
         public void Draw ()
         {
+            spriteBatch.Begin();
             spriteBatch.Draw(texture, boundary, Color.White);
+            spriteBatch.End();
         }
     }
 }

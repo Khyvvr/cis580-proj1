@@ -22,11 +22,11 @@ namespace MonoGameWindowsStarter
         /// Creates a paddle
         /// </summary>
         /// <param name="game"></param>
-        public BluePaddle(Game1 game)
+        public BluePaddle(Game1 game, int X, int Y)
         {
             this.game = game;
-            boundary.X = 0;
-            boundary.Y = (game.GraphicsDevice.Viewport.Height / 2) - (boundary.Width / 2);
+            boundary.X = X;
+            boundary.Y = Y;
             boundary.Width = 50;
             boundary.Height = 200;
         }
@@ -65,7 +65,9 @@ namespace MonoGameWindowsStarter
 
         public void Draw()
         {
+            spriteBatch.Begin();
             spriteBatch.Draw(texture, boundary, Color.Blue);
+            spriteBatch.End();
         }
     }
 }
