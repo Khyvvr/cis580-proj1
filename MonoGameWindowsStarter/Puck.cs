@@ -13,7 +13,7 @@ namespace MonoGameWindowsStarter
     {
         Game1 game;
         Texture2D texture;
-        Vector2 puckPos = Vector2.Zero;
+        Vector2 puckPos;
         Vector2 puckVel;
         SpriteBatch spriteBatch;
         Random random = new Random();
@@ -22,6 +22,8 @@ namespace MonoGameWindowsStarter
 
         public Puck (Game1 game)
         {
+            this.game = game;
+
             puckVel = new Vector2(
             (float)random.NextDouble(),
             (float)random.NextDouble()
@@ -29,7 +31,6 @@ namespace MonoGameWindowsStarter
 
             puckVel.Normalize();
 
-            this.game = game;
             boundary.X = 800;
             boundary.Y = 450;
             boundary.Width = 50;
@@ -44,7 +45,12 @@ namespace MonoGameWindowsStarter
 
         public void Update (GameTime gameTime)
         {
-            puckPos += (float) gameTime.ElapsedGameTime.TotalMilliseconds * 8 * puckVel;
+            puckPos += (float) gameTime.ElapsedGameTime.TotalMilliseconds * 2 * puckVel;
+
+            boundary.X = puckPos.X;
+            boundary.Y = puckPos.Y;
+
+            //if (collidesWith(boundary, other) then puckVel -= 1
 
             // check for wall collisions
             if (puckPos.Y < 0)
@@ -81,7 +87,8 @@ namespace MonoGameWindowsStarter
         public void Draw ()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, boundary, Color.White);
+            spriteBatch.Draw(texture, puckPos, Color.White);
+            spriteBatch.Draw(texture, boundary, Color.Red);
             spriteBatch.End();
         }
     }

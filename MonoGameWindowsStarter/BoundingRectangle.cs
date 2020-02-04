@@ -30,12 +30,12 @@ namespace MonoGameWindowsStarter
                                  (int)br.Height);
         }
 
-        /*public bool CollidesWith(BoundingRectangle other)
+        public bool CollidesWith(BoundingRectangle other)
         {
             return !(this.X > other.X + other.Width
                    || this.X + this.Width < other.X
                    || this.Y > other.Y + other.Height
                    || this.Y + this.Height < other.Y);
-        }*/
+        }
     }
 }

@@ -45,12 +45,12 @@ namespace MonoGameWindowsStarter
             graphics.ApplyChanges();
 
             bluePaddle1 = new BluePaddle(this, 175, 75);
-            bluePaddle2 = new BluePaddle(this, 175, 725);
-            bluePaddle3 = new BluePaddle(this, 600, 350);
+            bluePaddle2 = new BluePaddle(this, 175, 625);
+            bluePaddle3 = new BluePaddle(this, 550, 350);
 
             redPaddle1 = new RedPaddle(this, 1425, 75);
-            redPaddle2 = new RedPaddle(this, 1425, 725);
-            redPaddle3 = new RedPaddle(this, 950, 350);
+            redPaddle2 = new RedPaddle(this, 1425, 625);
+            redPaddle3 = new RedPaddle(this, 1000, 350);
 
             puck = new Puck(this);
 
@@ -111,6 +111,9 @@ namespace MonoGameWindowsStarter
             redPaddle2.Update(gameTime);
             redPaddle3.Update(gameTime);
 
+            //collisions
+            
+
             // Scoring with boundary rectangle??
 
             base.Update(gameTime);
@@ -126,6 +129,8 @@ namespace MonoGameWindowsStarter
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 900), Color.Transparent);
 
             puck.Draw();
 
