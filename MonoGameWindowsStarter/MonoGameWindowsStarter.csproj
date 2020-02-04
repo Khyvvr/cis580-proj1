@@ -41,9 +41,14 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BoundingCircle.cs" />
+    <Compile Include="BoundingRectangle.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="BluePaddle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Puck.cs" />
+    <Compile Include="RedPaddle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

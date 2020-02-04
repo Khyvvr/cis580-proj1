@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGameWindowsStarter;
 
 namespace MonoGameWindowsStarter
 {
@@ -11,6 +12,16 @@ namespace MonoGameWindowsStarter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        BluePaddle bluePaddle1 = new BluePaddle(this);
+        BluePaddle bluePaddle2 = new BluePaddle(this);
+        BluePaddle bluePaddle3 = new BluePaddle(this);
+
+        RedPaddle redPaddle1 = new RedPaddle(this);
+        RedPaddle redPaddle2 = new RedPaddle(this);
+        RedPaddle redPaddle3 = new RedPaddle(this);
+
+        Puck puck = new Puck(this);
 
         public Game1()
         {
@@ -27,6 +38,12 @@ namespace MonoGameWindowsStarter
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 900;
+            graphics.ApplyChanges();
+
+            //set all three paddles initial position
+             
 
             base.Initialize();
         }
@@ -63,6 +80,7 @@ namespace MonoGameWindowsStarter
                 Exit();
 
             // TODO: Add your update logic here
+            // Scoring with boundary rectangle??
 
             base.Update(gameTime);
         }
