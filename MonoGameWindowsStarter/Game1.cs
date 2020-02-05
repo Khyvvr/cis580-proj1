@@ -17,6 +17,7 @@ namespace MonoGameWindowsStarter
         int score2 = 0;
 
         Texture2D net1, net2, net3, net4;
+        Texture2D win1, win2;
 
         public Puck puck;
 
@@ -29,6 +30,7 @@ namespace MonoGameWindowsStarter
         public RedPaddle redPaddle3;
 
         public BoundingRectangle blueNet1, blueNet2, redNet1, redNet2;  // scoring boxes 
+        public BoundingRectangle p1win, p2win;
 
         Texture2D background;
 
@@ -67,6 +69,9 @@ namespace MonoGameWindowsStarter
 
             puck = new Puck(this);
 
+            p1win = new BoundingRectangle();    // create sizes here
+            p2win = new BoundingRectangle();    // create sizes here
+
             base.Initialize();
         }
 
@@ -96,6 +101,9 @@ namespace MonoGameWindowsStarter
             redPaddle1.LoadContent(Content);
             redPaddle2.LoadContent(Content);
             redPaddle3.LoadContent(Content);
+
+            win1 = Content.Load<Texture2D>("player1win");
+            win2 = Content.Load<Texture2D>("player2win");
 
         }
 
