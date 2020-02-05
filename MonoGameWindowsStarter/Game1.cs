@@ -44,13 +44,13 @@ namespace MonoGameWindowsStarter
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
 
-            bluePaddle1 = new BluePaddle(this, 175, 75);
-            bluePaddle2 = new BluePaddle(this, 175, 625);
+            bluePaddle1 = new BluePaddle(this, 250, 175);
+            bluePaddle2 = new BluePaddle(this, 250, 525);
             bluePaddle3 = new BluePaddle(this, 550, 350);
 
-            redPaddle1 = new RedPaddle(this, 1425, 75);
-            redPaddle2 = new RedPaddle(this, 1425, 625);
-            redPaddle3 = new RedPaddle(this, 1000, 350);
+            redPaddle1 = new RedPaddle(this, 1350, 175);
+            redPaddle2 = new RedPaddle(this, 1350, 525);
+            redPaddle3 = new RedPaddle(this, 1050, 350);
 
             puck = new Puck(this);
 

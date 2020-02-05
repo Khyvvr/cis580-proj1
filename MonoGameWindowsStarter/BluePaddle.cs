@@ -31,8 +31,8 @@ namespace MonoGameWindowsStarter
             this.game = game;
             boundary.X = X;
             boundary.Y = Y;
-            boundary.Width = 50;
-            boundary.Height = 200;
+            boundary.Width = 20;
+            boundary.Height = 100;
         }
 
         public void LoadContent(ContentManager content)
@@ -61,10 +61,29 @@ namespace MonoGameWindowsStarter
                 boundary.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
 
-            // stops pixel from moving out of game's window
-            if (boundary.Y < 0) boundary.Y = 0;
-            if (boundary.Y > game.GraphicsDevice.Viewport.Height - boundary.Height)
-                boundary.Y = game.GraphicsDevice.Viewport.Height - boundary.Height;
+            // some collision handling
+            if (game.bluePaddle1.boundary.Y < 0) 
+            {
+                game.bluePaddle1.boundary.Y = 0;
+                game.bluePaddle2.boundary.Y = 350;
+            }
+
+            if (game.bluePaddle2.boundary.Y > game.GraphicsDevice.Viewport.Height - boundary.Height)
+            { 
+                game.bluePaddle1.boundary.Y = 450;
+                game.bluePaddle2.boundary.Y = game.GraphicsDevice.Viewport.Height - boundary.Height;
+            }
+
+            if (game.bluePaddle3.boundary.Y < 175)
+            {
+                game.bluePaddle3.boundary.Y = 175;
+            }
+
+            if (game.bluePaddle3.boundary.Y > 625)
+            {
+                game.bluePaddle3.boundary.Y = 625;
+            }
+                
         }
 
         public void Draw()

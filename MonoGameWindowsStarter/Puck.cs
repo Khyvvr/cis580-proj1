@@ -25,6 +25,8 @@ namespace MonoGameWindowsStarter
         {
             this.game = game;
 
+            //puckPos.X = 800;
+            //puckPos.Y = 450;
             puckVel = new Vector2(
             (float)random.NextDouble(),
             (float)random.NextDouble()
