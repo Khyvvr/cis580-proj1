@@ -12,6 +12,11 @@ namespace MonoGameWindowsStarter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Collisions collisions = new Collisions();
+        int score1 = 0;
+        int score2 = 0;
+
+        Texture2D net1, net2, net3, net4;
 
         public Puck puck;
 
@@ -22,6 +27,8 @@ namespace MonoGameWindowsStarter
         public RedPaddle redPaddle1;
         public RedPaddle redPaddle2;
         public RedPaddle redPaddle3;
+
+        public BoundingRectangle blueNet1, blueNet2, redNet1, redNet2;  // scoring boxes 
 
         Texture2D background;
 
@@ -52,6 +59,12 @@ namespace MonoGameWindowsStarter
             redPaddle2 = new RedPaddle(this, 1350, 525);
             redPaddle3 = new RedPaddle(this, 1050, 350);
 
+            blueNet1 = new BoundingRectangle(0, 290, 100, 100);
+            blueNet2 = new BoundingRectangle(0, 590, 100, 100);
+
+            redNet1 = new BoundingRectangle(1500, 290, 100, 100);
+            redNet2 = new BoundingRectangle(1500, 590, 100, 100);
+
             puck = new Puck(this);
 
             base.Initialize();
@@ -68,6 +81,11 @@ namespace MonoGameWindowsStarter
 
             // TODO: use this.Content to load your game content here
             background = Content.Load<Texture2D>("background");
+
+            net1 = Content.Load<Texture2D>("pixel");
+            net2 = Content.Load<Texture2D>("pixel");
+            net3 = Content.Load<Texture2D>("pixel");
+            net4 = Content.Load<Texture2D>("pixel");
 
             puck.LoadContent(Content);
 
@@ -132,6 +150,11 @@ namespace MonoGameWindowsStarter
 
             spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 900), Color.Transparent);
 
+            spriteBatch.Draw(net1, blueNet1, Color.Black);
+            spriteBatch.Draw(net2, blueNet2, Color.Black);
+            spriteBatch.Draw(net3, redNet1, Color.Black);
+            spriteBatch.Draw(net4, redNet2, Color.Black);
+
             puck.Draw();
 
             bluePaddle1.Draw();
@@ -145,6 +168,48 @@ namespace MonoGameWindowsStarter
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void Score(GameTime gameTime)
+        {
+            if (collisions.Collides(puck.GetBounds(), blueNet1))
+            {
+                score2++;
+            }
+
+            if (collisions.Collides(puck.GetBounds(), blueNet2))
+            {
+                score2++;
+            }
+
+            if (collisions.Collides(puck.GetBounds(), redNet1))
+            {
+                score1++;
+            }
+
+            if (collisions.Collides(puck.GetBounds(), redNet2))
+            {
+                score1++;
+            }
+
+            if (score1 == 3)
+            {
+                GraphicsDevice.Clear(Color.Black);
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(win1, p1win, Color.Transparent);
+                spriteBatch.End();
+            }
+
+            if (score2 == 3)
+            {
+                GraphicsDevice.Clear(Color.Black);
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(win2, p2win, Color.Transparent);
+                spriteBatch.End();
+            }
+
         }
     }
 }

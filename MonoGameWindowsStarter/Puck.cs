@@ -25,8 +25,8 @@ namespace MonoGameWindowsStarter
         {
             this.game = game;
 
-            //puckPos.X = 800;
-            //puckPos.Y = 450;
+            puckPos.X = 800;
+            puckPos.Y = 450;
             puckVel = new Vector2(
             (float)random.NextDouble(),
             (float)random.NextDouble()
@@ -38,6 +38,11 @@ namespace MonoGameWindowsStarter
             boundary.Y = 450;
             boundary.Width = 50;
             boundary.Height = 50;
+        }
+
+        public BoundingRectangle GetBounds()
+        {
+            return boundary;
         }
 
         public void LoadContent (ContentManager content)
