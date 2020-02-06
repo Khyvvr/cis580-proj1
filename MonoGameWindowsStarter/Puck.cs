@@ -18,8 +18,8 @@ namespace MonoGameWindowsStarter
         SpriteBatch spriteBatch;
         Random random = new Random();
 
-        int score1 = 0;
-        int score2 = 0;
+        public int score1;
+        public int score2;
 
         Texture2D win1, win2;
         public Rectangle p1win, p2win;
@@ -46,6 +46,9 @@ namespace MonoGameWindowsStarter
 
             p1win = new Rectangle(0, 0, 1600, 900);
             p2win = new Rectangle(0, 0, 1600, 900);
+
+            score1 = 0;
+            score2 = 0;
         }
 
         public BoundingRectangle GetBounds()
@@ -84,21 +87,18 @@ namespace MonoGameWindowsStarter
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (puckPos.Collides(game.redPaddle1.GetBoundary()))
+            if (game.redPaddle1.GetBoundary().Collides(puckPos))
             {
-                puckVel *= -1;
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (puckPos.Collides(game.redPaddle2.GetBoundary()))
+            if (game.redPaddle2.GetBoundary().Collides(puckPos))
             {
-                puckVel *= -1;
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (puckPos.Collides(game.redPaddle3.GetBoundary()))
+            if (game.redPaddle3.GetBoundary().Collides(puckPos))
             {
-                puckVel *= -1;
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
@@ -168,29 +168,22 @@ namespace MonoGameWindowsStarter
         {
             spriteBatch.Begin();
             spriteBatch.Draw(texture, boundary, Color.White);
-            spriteBatch.End();
 
             if (score1 == 3)
             {
-                score1 = 0;
-                score2 = 0;
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
-                spriteBatch.Begin();
                 spriteBatch.Draw(win1, p1win, Color.AntiqueWhite);
-                spriteBatch.End();
             }
 
             if (score2 == 3)
             {
-                score1 = 0;
-                score2 = 0;
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
-                spriteBatch.Begin();
                 spriteBatch.Draw(win2, p2win, Color.AntiqueWhite);
-                spriteBatch.End();
             }
+
+            spriteBatch.End();
         }
     }
 }
