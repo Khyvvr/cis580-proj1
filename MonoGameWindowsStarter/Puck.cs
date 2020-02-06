@@ -87,17 +87,17 @@ namespace MonoGameWindowsStarter
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (game.redPaddle1.GetBoundary().Collides(puckPos))
+            if (puckPos.Collides(game.redPaddle1.GetBoundary()))
             {
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (game.redPaddle2.GetBoundary().Collides(puckPos))
+            if (puckPos.Collides(game.redPaddle2.GetBoundary()))
             {
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
 
-            if (game.redPaddle3.GetBoundary().Collides(puckPos))
+            if (puckPos.Collides(game.redPaddle3.GetBoundary()))
             {
                 puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
             }
@@ -168,22 +168,25 @@ namespace MonoGameWindowsStarter
         {
             spriteBatch.Begin();
             spriteBatch.Draw(texture, boundary, Color.White);
+            spriteBatch.End();
 
             if (score1 == 3)
             {
+                spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Draw(win1, p1win, Color.AntiqueWhite);
+                spriteBatch.End();
             }
 
             if (score2 == 3)
             {
+                spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Draw(win2, p2win, Color.AntiqueWhite);
+                spriteBatch.End();
             }
-
-            spriteBatch.End();
         }
     }
 }
