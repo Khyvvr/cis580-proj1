@@ -20,11 +20,6 @@ namespace MonoGameWindowsStarter
                   || a.Y + a.Height < b.Y);     // a is below b
         }
 
-        public static bool Collides(this Vector2 v, Vector2 other)
-        {
-            return v == other;
-        }
-
         public static bool Collides(this Vector2 v, BoundingRectangle r)
         {
             return (r.X <= v.X && v.X <= r.X + r.Width)

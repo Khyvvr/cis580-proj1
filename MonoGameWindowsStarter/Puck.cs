@@ -111,10 +111,10 @@ namespace MonoGameWindowsStarter
                 puckPos.Y += 2 * delta;
             }
 
-            if (puckPos.Y > game.GraphicsDevice.Viewport.Height - 100)
+            if (puckPos.Y > game.GraphicsDevice.Viewport.Height - 35)
             {
                 puckVel.Y *= -1;
-                float delta = game.GraphicsDevice.Viewport.Height - 100 - puckPos.Y;
+                float delta = game.GraphicsDevice.Viewport.Height - 35 - puckPos.Y;
                 puckPos.Y += 2 * delta;
 
             }
@@ -126,10 +126,10 @@ namespace MonoGameWindowsStarter
                 puckPos.X += 2 * delta;
             }
 
-            if (puckPos.X > game.GraphicsDevice.Viewport.Width - 100)
+            if (puckPos.X > game.GraphicsDevice.Viewport.Width - 35)
             {
                 puckVel.X *= -1;
-                float delta = game.GraphicsDevice.Viewport.Width - 100 - puckPos.X;
+                float delta = game.GraphicsDevice.Viewport.Width - 35 - puckPos.X;
                 puckPos.X += 2 * delta;
             }
 
