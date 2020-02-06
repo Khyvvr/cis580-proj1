@@ -102,7 +102,30 @@ namespace MonoGameWindowsStarter
             {
                 game.bluePaddle3.boundary.Y = 625;
             }
-                
+
+            // red paddles fix
+            if (game.redPaddle1.boundary.Y < 0)
+            {
+                game.redPaddle1.boundary.Y = 0;
+                game.redPaddle2.boundary.Y = 350;
+            }
+
+            if (game.redPaddle2.boundary.Y > game.GraphicsDevice.Viewport.Height - boundary.Height)
+            {
+                game.redPaddle1.boundary.Y = 425;
+                game.redPaddle2.boundary.Y = game.GraphicsDevice.Viewport.Height - boundary.Height;
+            }
+
+            if (game.redPaddle3.boundary.Y < 175)
+            {
+                game.redPaddle3.boundary.Y = 175;
+            }
+
+            if (game.redPaddle3.boundary.Y > 625)
+            {
+                game.redPaddle3.boundary.Y = 625;
+            }
+
         }
 
         public void Draw()

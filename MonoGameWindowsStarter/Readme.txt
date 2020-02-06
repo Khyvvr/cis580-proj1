@@ -1,4 +1,6 @@
 ﻿
+THIS IS A 2 player game!!!!!
+
 This game is a cross between classic pong and air hockey.
 
 The goal of the game is to score 3 points before your opponent. To score, the puck must reach your opponent's net displayed by a black box.
