@@ -32,8 +32,8 @@ namespace MonoGameWindowsStarter
             this.game = game;
             boundary.X = X;
             boundary.Y = Y;
-            boundary.Width = 20;
-            boundary.Height = 100;
+            boundary.Width = 40;
+            boundary.Height = 150;
         }
 
         public void LoadContent(ContentManager content)
@@ -63,6 +63,7 @@ namespace MonoGameWindowsStarter
             }
 
             // some collision handling
+            /*
             if (game.redPaddle1.boundary.Y < 0)
             {
                 game.redPaddle1.boundary.Y = 0;
@@ -71,7 +72,7 @@ namespace MonoGameWindowsStarter
 
             if (game.redPaddle2.boundary.Y > game.GraphicsDevice.Viewport.Height - boundary.Height)
             {
-                game.redPaddle1.boundary.Y = 450;
+                game.redPaddle1.boundary.Y = 425;
                 game.redPaddle2.boundary.Y = game.GraphicsDevice.Viewport.Height - boundary.Height;
             }
 
@@ -84,6 +85,7 @@ namespace MonoGameWindowsStarter
             {
                 game.redPaddle3.boundary.Y = 625;
             }
+            */
         }
 
         public void Draw()

@@ -10,12 +10,13 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameWindowsStarter
 {
-    public class BluePaddle
+    public class Paddle
     {
         Game1 game;
         Texture2D texture;
         SpriteBatch spriteBatch;
         BoundingRectangle boundary;
+        int p;
 
         public BoundingRectangle GetBoundary()
         {
@@ -26,13 +27,14 @@ namespace MonoGameWindowsStarter
         /// Creates a paddle
         /// </summary>
         /// <param name="game"></param>
-        public BluePaddle(Game1 game, int X, int Y)
+        public Paddle(Game1 game, int X, int Y, int player)
         {
             this.game = game;
             boundary.X = X;
             boundary.Y = Y;
-            boundary.Width = 20;
-            boundary.Height = 100;
+            boundary.Width = 40;
+            boundary.Height = 150;
+            p = player;
         }
 
         public void LoadContent(ContentManager content)
@@ -51,15 +53,32 @@ namespace MonoGameWindowsStarter
             if (keyboardState.IsKeyDown(Keys.Escape))
                 game.Exit();
 
-            if (keyboardState.IsKeyDown(Keys.W))
+            if (p == 1)
             {
-                boundary.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    boundary.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
+
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    boundary.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
             }
 
-            if (keyboardState.IsKeyDown(Keys.S))
+            if (p == 2)
             {
-                boundary.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (keyboardState.IsKeyDown(Keys.I))
+                {
+                    boundary.Y -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
+
+                if (keyboardState.IsKeyDown(Keys.K))
+                {
+                    boundary.Y += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
             }
+            
 
             // some collision handling
             if (game.bluePaddle1.boundary.Y < 0) 
@@ -70,7 +89,7 @@ namespace MonoGameWindowsStarter
 
             if (game.bluePaddle2.boundary.Y > game.GraphicsDevice.Viewport.Height - boundary.Height)
             { 
-                game.bluePaddle1.boundary.Y = 450;
+                game.bluePaddle1.boundary.Y = 425;
                 game.bluePaddle2.boundary.Y = game.GraphicsDevice.Viewport.Height - boundary.Height;
             }
 
@@ -89,7 +108,13 @@ namespace MonoGameWindowsStarter
         public void Draw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, boundary, Color.Blue);
+
+            if (p ==1)
+                spriteBatch.Draw(texture, boundary, Color.Blue);
+
+            if (p == 2)
+                spriteBatch.Draw(texture, boundary, Color.Red);
+
             spriteBatch.End();
         }
     }

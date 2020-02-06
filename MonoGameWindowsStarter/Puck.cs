@@ -17,7 +17,12 @@ namespace MonoGameWindowsStarter
         Vector2 puckVel;
         SpriteBatch spriteBatch;
         Random random = new Random();
-        Collisions collisions = new Collisions();
+
+        int score1 = 0;
+        int score2 = 0;
+
+        Texture2D win1, win2;
+        public Rectangle p1win, p2win;
 
         BoundingRectangle boundary;
 
@@ -36,8 +41,11 @@ namespace MonoGameWindowsStarter
 
             boundary.X = 800;
             boundary.Y = 450;
-            boundary.Width = 50;
-            boundary.Height = 50;
+            boundary.Width = 35;
+            boundary.Height = 35;
+
+            p1win = new Rectangle(0, 0, 1600, 900);
+            p2win = new Rectangle(0, 0, 1600, 900);
         }
 
         public BoundingRectangle GetBounds()
@@ -49,33 +57,50 @@ namespace MonoGameWindowsStarter
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
             texture = content.Load<Texture2D>("puck");
+            win1 = content.Load<Texture2D>("player1win");
+            win2 = content.Load<Texture2D>("player2win");
         }
 
         public void Update (GameTime gameTime)
         {
-            puckPos += (float) gameTime.ElapsedGameTime.TotalMilliseconds * 2 * puckVel;
+            puckPos += (float)gameTime.ElapsedGameTime.TotalMilliseconds * puckVel;
 
             boundary.X = puckPos.X;
             boundary.Y = puckPos.Y;
 
             // handles collision for paddles
-            if (collisions.Collides(boundary, game.bluePaddle1.GetBoundary()))
-                puckVel *= -1;
+            if (puckPos.Collides(game.bluePaddle1.GetBoundary()))
+            {
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
-            if (collisions.Collides(boundary, game.bluePaddle2.GetBoundary()))
-                puckVel *= -1;
+            if (puckPos.Collides(game.bluePaddle2.GetBoundary()))
+            {
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
-            if (collisions.Collides(boundary, game.bluePaddle3.GetBoundary()))
-                puckVel *= -1;
+            if (puckPos.Collides(game.bluePaddle3.GetBoundary()))
+            {
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
-            if (collisions.Collides(boundary, game.redPaddle1.GetBoundary()))
+            if (puckPos.Collides(game.redPaddle1.GetBoundary()))
+            {
                 puckVel *= -1;
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
-            if (collisions.Collides(boundary, game.redPaddle2.GetBoundary()))
+            if (puckPos.Collides(game.redPaddle2.GetBoundary()))
+            {
                 puckVel *= -1;
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
-            if (collisions.Collides(boundary, game.redPaddle3.GetBoundary()))
+            if (puckPos.Collides(game.redPaddle3.GetBoundary()))
+            {
                 puckVel *= -1;
+                puckVel = new Vector2((float)random.NextDouble(), (puckVel.Y * -1));
+            }
 
 
             // check for wall collisions
@@ -108,14 +133,64 @@ namespace MonoGameWindowsStarter
                 puckPos.X += 2 * delta;
             }
 
+            
+            // scoring
+            if (puckPos.Collides(game.blueNet1))
+            {
+                puckPos.X = 800;
+                puckPos.Y = 450;
+                score2++;
+            }
+
+            if (puckPos.Collides(game.blueNet2))
+            {
+                puckPos.X = 800;
+                puckPos.Y = 450;
+                score2++;
+            }
+
+            if (puckPos.Collides(game.redNet1))
+            {
+                puckPos.X = 800;
+                puckPos.Y = 450;
+                score1++;
+            }
+
+            if (puckPos.Collides(game.redNet2))
+            {
+                puckPos.X = 800;
+                puckPos.Y = 450;
+                score1++;
+            }
         }
 
         public void Draw ()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, puckPos, Color.White);
-            spriteBatch.Draw(texture, boundary, Color.Red);
+            spriteBatch.Draw(texture, boundary, Color.White);
             spriteBatch.End();
+
+            if (score1 == 3)
+            {
+                score1 = 0;
+                score2 = 0;
+                spriteBatch.GraphicsDevice.Clear(Color.Black);
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(win1, p1win, Color.AntiqueWhite);
+                spriteBatch.End();
+            }
+
+            if (score2 == 3)
+            {
+                score1 = 0;
+                score2 = 0;
+                spriteBatch.GraphicsDevice.Clear(Color.Black);
+
+                spriteBatch.Begin();
+                spriteBatch.Draw(win2, p2win, Color.AntiqueWhite);
+                spriteBatch.End();
+            }
         }
     }
 }

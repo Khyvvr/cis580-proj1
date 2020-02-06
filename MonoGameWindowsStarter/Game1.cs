@@ -12,27 +12,23 @@ namespace MonoGameWindowsStarter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Collisions collisions = new Collisions();
-        int score1 = 0;
-        int score2 = 0;
 
         Texture2D net1, net2, net3, net4;
-        Texture2D win1, win2;
 
         public Puck puck;
 
-        public BluePaddle bluePaddle1;
-        public BluePaddle bluePaddle2;
-        public BluePaddle bluePaddle3;
+        public Paddle bluePaddle1;
+        public Paddle bluePaddle2;
+        public Paddle bluePaddle3;
 
-        public RedPaddle redPaddle1;
-        public RedPaddle redPaddle2;
-        public RedPaddle redPaddle3;
+        public Paddle redPaddle1;
+        public Paddle redPaddle2;
+        public Paddle redPaddle3;
 
-        public BoundingRectangle blueNet1, blueNet2, redNet1, redNet2;  // scoring boxes 
-        public BoundingRectangle p1win, p2win;
+        public BoundingRectangle blueNet1, blueNet2, redNet1, redNet2;  // scoring boxes
 
         Texture2D background;
+        Rectangle mainFrame = new Rectangle(0, 0, 1600, 900);
 
         public Game1()
         {
@@ -53,13 +49,13 @@ namespace MonoGameWindowsStarter
             graphics.PreferredBackBufferHeight = 900;
             graphics.ApplyChanges();
 
-            bluePaddle1 = new BluePaddle(this, 250, 175);
-            bluePaddle2 = new BluePaddle(this, 250, 525);
-            bluePaddle3 = new BluePaddle(this, 550, 350);
+            bluePaddle1 = new Paddle(this, 250, 175, 1);
+            bluePaddle2 = new Paddle(this, 250, 525, 1);
+            bluePaddle3 = new Paddle(this, 550, 350, 1);
 
-            redPaddle1 = new RedPaddle(this, 1350, 175);
-            redPaddle2 = new RedPaddle(this, 1350, 525);
-            redPaddle3 = new RedPaddle(this, 1050, 350);
+            redPaddle1 = new Paddle(this, 1350, 175, 2);
+            redPaddle2 = new Paddle(this, 1350, 525, 2);
+            redPaddle3 = new Paddle(this, 1050, 350, 2);
 
             blueNet1 = new BoundingRectangle(0, 290, 100, 100);
             blueNet2 = new BoundingRectangle(0, 590, 100, 100);
@@ -68,9 +64,6 @@ namespace MonoGameWindowsStarter
             redNet2 = new BoundingRectangle(1500, 590, 100, 100);
 
             puck = new Puck(this);
-
-            p1win = new BoundingRectangle();    // create sizes here
-            p2win = new BoundingRectangle();    // create sizes here
 
             base.Initialize();
         }
@@ -101,10 +94,6 @@ namespace MonoGameWindowsStarter
             redPaddle1.LoadContent(Content);
             redPaddle2.LoadContent(Content);
             redPaddle3.LoadContent(Content);
-
-            win1 = Content.Load<Texture2D>("player1win");
-            win2 = Content.Load<Texture2D>("player2win");
-
         }
 
         /// <summary>
@@ -137,11 +126,6 @@ namespace MonoGameWindowsStarter
             redPaddle2.Update(gameTime);
             redPaddle3.Update(gameTime);
 
-            //collisions
-            
-
-            // Scoring with boundary rectangle??
-
             base.Update(gameTime);
         }
 
@@ -155,15 +139,14 @@ namespace MonoGameWindowsStarter
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+            spriteBatch.Draw(background, mainFrame, Color.AntiqueWhite);
+            spriteBatch.End();
 
-            spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 900), Color.Transparent);
-
+            spriteBatch.Begin();
             spriteBatch.Draw(net1, blueNet1, Color.Black);
             spriteBatch.Draw(net2, blueNet2, Color.Black);
             spriteBatch.Draw(net3, redNet1, Color.Black);
             spriteBatch.Draw(net4, redNet2, Color.Black);
-
-            puck.Draw();
 
             bluePaddle1.Draw();
             bluePaddle2.Draw();
@@ -173,51 +156,11 @@ namespace MonoGameWindowsStarter
             redPaddle2.Draw();
             redPaddle3.Draw();
 
+            puck.Draw();
+
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        public void Score(GameTime gameTime)
-        {
-            if (collisions.Collides(puck.GetBounds(), blueNet1))
-            {
-                score2++;
-            }
-
-            if (collisions.Collides(puck.GetBounds(), blueNet2))
-            {
-                score2++;
-            }
-
-            if (collisions.Collides(puck.GetBounds(), redNet1))
-            {
-                score1++;
-            }
-
-            if (collisions.Collides(puck.GetBounds(), redNet2))
-            {
-                score1++;
-            }
-
-            if (score1 == 3)
-            {
-                GraphicsDevice.Clear(Color.Black);
-
-                spriteBatch.Begin();
-                spriteBatch.Draw(win1, p1win, Color.Transparent);
-                spriteBatch.End();
-            }
-
-            if (score2 == 3)
-            {
-                GraphicsDevice.Clear(Color.Black);
-
-                spriteBatch.Begin();
-                spriteBatch.Draw(win2, p2win, Color.Transparent);
-                spriteBatch.End();
-            }
-
         }
     }
 }
