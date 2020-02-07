@@ -12,6 +12,7 @@ namespace MonoGameWindowsStarter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Collisions collisions = new Collisions();
 
         Texture2D net1, net2, net3, net4;
 

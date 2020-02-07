@@ -32,7 +32,7 @@ namespace MonoGameWindowsStarter
             this.game = game;
             boundary.X = X;
             boundary.Y = Y;
-            boundary.Width = 40;
+            boundary.Width = 30;
             boundary.Height = 150;
             p = player;
         }
