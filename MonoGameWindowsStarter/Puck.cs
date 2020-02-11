@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace MonoGameWindowsStarter
 {
@@ -18,6 +19,11 @@ namespace MonoGameWindowsStarter
         SpriteBatch spriteBatch;
         Random random = new Random();
         Collisions collisions = new Collisions();
+        
+        SoundEffect hitPaddle;
+        SoundEffect hitWall; 
+        SoundEffect goooal;
+        SoundEffect victory;
 
         public int score1;
         public int score2;
@@ -63,6 +69,11 @@ namespace MonoGameWindowsStarter
             texture = content.Load<Texture2D>("puck");
             win1 = content.Load<Texture2D>("player1win");
             win2 = content.Load<Texture2D>("player2win");
+
+            hitPaddle = content.Load<SoundEffect>("hitPaddle");
+            hitWall = content.Load<SoundEffect>("hitWall");
+            goooal = content.Load<SoundEffect>("score");
+            victory = content.Load<SoundEffect>("victory");
         }
 
         public void Update (GameTime gameTime)
@@ -75,36 +86,42 @@ namespace MonoGameWindowsStarter
             // handles collision for paddles
             if (collisions.Collides(puckPos, game.bluePaddle1.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
 
             if (collisions.Collides(puckPos, game.bluePaddle2.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
 
             if (collisions.Collides(puckPos, game.bluePaddle3.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
 
             if (collisions.Collides(puckPos, game.redPaddle1.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
 
             if (collisions.Collides(puckPos, game.redPaddle2.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
 
             if (collisions.Collides(puckPos, game.redPaddle3.GetBoundary()))
             {
+                hitPaddle.Play();
                 puckVel.Y = (float)random.NextDouble();
                 puckVel.X *= -1;
             }
@@ -113,6 +130,7 @@ namespace MonoGameWindowsStarter
             // check for mainFrame collisions
             if (puckPos.Y < 0)
             {
+                hitWall.Play();
                 puckVel.Y *= -1;
                 float delta = 0 - puckPos.Y;
                 puckPos.Y += 2 * delta;
@@ -120,6 +138,7 @@ namespace MonoGameWindowsStarter
 
             if (puckPos.Y > game.GraphicsDevice.Viewport.Height - 35)
             {
+                hitWall.Play();
                 puckVel.Y *= -1;
                 float delta = game.GraphicsDevice.Viewport.Height - 35 - puckPos.Y;
                 puckPos.Y += 2 * delta;
@@ -128,6 +147,7 @@ namespace MonoGameWindowsStarter
 
             if (puckPos.X < 0)
             {
+                hitWall.Play();
                 puckVel.X *= -1;
                 float delta = 0 - puckPos.X;
                 puckPos.X += 2 * delta;
@@ -135,6 +155,7 @@ namespace MonoGameWindowsStarter
 
             if (puckPos.X > game.GraphicsDevice.Viewport.Width - 35)
             {
+                hitWall.Play();
                 puckVel.X *= -1;
                 float delta = game.GraphicsDevice.Viewport.Width - 35 - puckPos.X;
                 puckPos.X += 2 * delta;
@@ -144,6 +165,7 @@ namespace MonoGameWindowsStarter
             // scoring
             if (collisions.Collides(puckPos, game.blueNet1))
             {
+                goooal.Play();
                 puckPos.X = 800;
                 puckPos.Y = 450;
                 score2++;
@@ -151,6 +173,7 @@ namespace MonoGameWindowsStarter
 
             if (collisions.Collides(puckPos, game.blueNet2))
             {
+                goooal.Play();
                 puckPos.X = 800;
                 puckPos.Y = 450;
                 score2++;
@@ -158,6 +181,7 @@ namespace MonoGameWindowsStarter
 
             if (collisions.Collides(puckPos, game.redNet1))
             {
+                goooal.Play();
                 puckPos.X = 800;
                 puckPos.Y = 450;
                 score1++;
@@ -165,6 +189,7 @@ namespace MonoGameWindowsStarter
 
             if (collisions.Collides(puckPos, game.redNet2))
             {
+                goooal.Play();
                 puckPos.X = 800;
                 puckPos.Y = 450;
                 score1++;
@@ -183,6 +208,7 @@ namespace MonoGameWindowsStarter
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Draw(win1, p1win, Color.AntiqueWhite);
+                victory.Play();
                 spriteBatch.End();
             }
 
@@ -192,6 +218,7 @@ namespace MonoGameWindowsStarter
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Draw(win2, p2win, Color.AntiqueWhite);
+                victory.Play();
                 spriteBatch.End();
             }
         }
