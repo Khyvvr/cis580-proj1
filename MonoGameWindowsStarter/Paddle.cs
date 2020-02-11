@@ -40,7 +40,17 @@ namespace MonoGameWindowsStarter
         public void LoadContent(ContentManager content)
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
-            texture = content.Load<Texture2D>("pixel");
+
+            //determine paddle color based on team
+            if (p == 1)
+            {
+                texture = content.Load<Texture2D>("bluePaddle");
+            }
+
+            if (p == 2)
+            {
+                texture = content.Load<Texture2D>("redPaddle");
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -133,10 +143,10 @@ namespace MonoGameWindowsStarter
             spriteBatch.Begin();
 
             if (p ==1)
-                spriteBatch.Draw(texture, boundary, Color.Blue);
+                spriteBatch.Draw(texture, boundary, Color.AntiqueWhite);
 
             if (p == 2)
-                spriteBatch.Draw(texture, boundary, Color.Red);
+                spriteBatch.Draw(texture, boundary, Color.AntiqueWhite);
 
             spriteBatch.End();
         }
