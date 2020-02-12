@@ -27,6 +27,9 @@ namespace MonoGameWindowsStarter
         public Paddle redPaddle2;
         public Paddle redPaddle3;
 
+        public Scoreboard blueScoreboard;
+        public Scoreboard redScoreboard;
+
 
         Texture2D background;
         Rectangle mainFrame = new Rectangle(0, 0, 1600, 900);
@@ -63,6 +66,9 @@ namespace MonoGameWindowsStarter
 
             puck = new Puck(this);
 
+            blueScoreboard = new Scoreboard(825, 825, this, puck, 1);
+            redScoreboard = new Scoreboard(725, 825, this, puck, 2);
+
             base.Initialize();
         }
 
@@ -90,6 +96,9 @@ namespace MonoGameWindowsStarter
             redPaddle1.LoadContent(Content);
             redPaddle2.LoadContent(Content);
             redPaddle3.LoadContent(Content);
+
+            blueScoreboard.LoadContent();
+            redScoreboard.LoadContent();
         }
 
         /// <summary>
@@ -122,10 +131,14 @@ namespace MonoGameWindowsStarter
             redPaddle2.Update(gameTime);
             redPaddle3.Update(gameTime);
 
-
-            // here or before puck update?
             blueNet.Update(gameTime);
             redNet.Update(gameTime);
+
+
+
+            // update scoreboard here (make sure it's checking for score here and updating in class)
+            blueScoreboard.Update(gameTime);
+            redScoreboard.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -154,6 +167,9 @@ namespace MonoGameWindowsStarter
             redPaddle1.Draw();
             redPaddle2.Draw();
             redPaddle3.Draw();
+
+            blueScoreboard.Draw(spriteBatch);
+            redScoreboard.Draw(spriteBatch);
 
             puck.Draw();
 
