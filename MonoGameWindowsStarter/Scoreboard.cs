@@ -12,8 +12,13 @@ namespace MonoGameWindowsStarter
     public enum State
     {
         One = 1,
+        OneIdle = 15,
+
         Two = 2,
+        TwoIdle = 25,
+
         Three = 3,
+
         Idle = 4
     }
     public class Scoreboard
@@ -97,6 +102,8 @@ namespace MonoGameWindowsStarter
             }
 
             if (state != State.Idle) timer += gameTime.ElapsedGameTime;
+            if (state != State.OneIdle) timer += gameTime.ElapsedGameTime;
+            if (state != State.TwoIdle) timer += gameTime.ElapsedGameTime;
 
             while (timer.TotalMilliseconds > ANIMATION_FRAMERATE)
             {
