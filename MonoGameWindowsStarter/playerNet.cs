@@ -85,7 +85,7 @@ namespace MonoGameWindowsStarter
             if (netPosition.Y > game.GraphicsDevice.Viewport.Height - 350)
             {
                 netVelocity.Y *= -1;
-                float delta = game.GraphicsDevice.Viewport.Height - 35 - netPosition.Y;
+                float delta = game.GraphicsDevice.Viewport.Height - 350 - netPosition.Y;
                 netPosition.Y += 2 * delta;
             }
         }
