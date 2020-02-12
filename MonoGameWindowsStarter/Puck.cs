@@ -167,7 +167,7 @@ namespace MonoGameWindowsStarter
 
             
             // scoring
-            if (collisions.Collides(puckPos, game.blueNet1))
+            if (collisions.Collides(puckPos, game.blueNet.GetBoundary()))
             {
                 goooal.Play();
                 puckPos.X = 800;
@@ -175,23 +175,7 @@ namespace MonoGameWindowsStarter
                 score2++;
             }
 
-            if (collisions.Collides(puckPos, game.blueNet2))
-            {
-                goooal.Play();
-                puckPos.X = 800;
-                puckPos.Y = 450;
-                score2++;
-            }
-
-            if (collisions.Collides(puckPos, game.redNet1))
-            {
-                goooal.Play();
-                puckPos.X = 800;
-                puckPos.Y = 450;
-                score1++;
-            }
-
-            if (collisions.Collides(puckPos, game.redNet2))
+            if (collisions.Collides(puckPos, game.redNet.GetBoundary()))
             {
                 goooal.Play();
                 puckPos.X = 800;

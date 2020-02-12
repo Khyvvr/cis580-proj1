@@ -14,7 +14,8 @@ namespace MonoGameWindowsStarter
         SpriteBatch spriteBatch;
         Collisions collisions = new Collisions();
 
-        Texture2D net1, net2, net3, net4;
+        public playerNet blueNet;
+        public playerNet redNet;
 
         public Puck puck;
 
@@ -26,7 +27,6 @@ namespace MonoGameWindowsStarter
         public Paddle redPaddle2;
         public Paddle redPaddle3;
 
-        public BoundingRectangle blueNet1, blueNet2, redNet1, redNet2;  // scoring boxes
 
         Texture2D background;
         Rectangle mainFrame = new Rectangle(0, 0, 1600, 900);
@@ -58,11 +58,8 @@ namespace MonoGameWindowsStarter
             redPaddle2 = new Paddle(this, 1350, 525, 2);
             redPaddle3 = new Paddle(this, 1050, 350, 2);
 
-            blueNet1 = new BoundingRectangle(0, 290, 100, 100);
-            blueNet2 = new BoundingRectangle(0, 590, 100, 100);
-
-            redNet1 = new BoundingRectangle(1500, 290, 100, 100);
-            redNet2 = new BoundingRectangle(1500, 590, 100, 100);
+            blueNet = new playerNet(this, 0, 275, 1);
+            redNet = new playerNet(this, 1550, 275, 2);
 
             puck = new Puck(this);
 
@@ -81,10 +78,8 @@ namespace MonoGameWindowsStarter
             // TODO: use this.Content to load your game content here
             background = Content.Load<Texture2D>("background");
 
-            net1 = Content.Load<Texture2D>("pixel");
-            net2 = Content.Load<Texture2D>("pixel");
-            net3 = Content.Load<Texture2D>("pixel");
-            net4 = Content.Load<Texture2D>("pixel");
+            blueNet.LoadContent(Content);
+            redNet.LoadContent(Content);
 
             puck.LoadContent(Content);
 
@@ -127,6 +122,11 @@ namespace MonoGameWindowsStarter
             redPaddle2.Update(gameTime);
             redPaddle3.Update(gameTime);
 
+
+            // here or before puck update?
+            blueNet.Update(gameTime);
+            redNet.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -144,10 +144,8 @@ namespace MonoGameWindowsStarter
             spriteBatch.End();
 
             spriteBatch.Begin();
-            spriteBatch.Draw(net1, blueNet1, Color.Black);
-            spriteBatch.Draw(net2, blueNet2, Color.Black);
-            spriteBatch.Draw(net3, redNet1, Color.Black);
-            spriteBatch.Draw(net4, redNet2, Color.Black);
+            blueNet.Draw();
+            redNet.Draw();
 
             bluePaddle1.Draw();
             bluePaddle2.Draw();
