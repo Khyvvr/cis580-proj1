@@ -58,8 +58,8 @@ namespace MonoGameWindowsStarter
             redPaddle2 = new Paddle(this, 1350, 525, 2);
             redPaddle3 = new Paddle(this, 1050, 350, 2);
 
-            blueNet = new playerNet(this, 0, 275, 1);
-            redNet = new playerNet(this, 1550, 275, 2);
+            blueNet = new playerNet(this, 35, 275, 1);
+            redNet = new playerNet(this, 1515, 275, 2);
 
             puck = new Puck(this);
 

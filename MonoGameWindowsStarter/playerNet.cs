@@ -64,21 +64,29 @@ namespace MonoGameWindowsStarter
             if (player == 1)
             {
                 netPosition += (float)gameTime.ElapsedGameTime.TotalMilliseconds * netVelocity;
+
+                boundary.Y = netPosition.Y;
             }
 
             if (player == 2)
             {
                 netPosition -= (float)gameTime.ElapsedGameTime.TotalMilliseconds * netVelocity;
+
+                boundary.Y = netPosition.Y;
             }
 
-            if (boundary.Y == 0)
+            if (netPosition.Y < 0)
             {
                 netVelocity.Y *= -1;
+                float delta = 0 - netPosition.Y;
+                netPosition.Y += 2 * delta;
             }
 
-            if (boundary.Y + boundary.Height == 1600)
+            if (netPosition.Y > game.GraphicsDevice.Viewport.Height - 350)
             {
                 netVelocity.Y *= -1;
+                float delta = game.GraphicsDevice.Viewport.Height - 35 - netPosition.Y;
+                netPosition.Y += 2 * delta;
             }
         }
 
