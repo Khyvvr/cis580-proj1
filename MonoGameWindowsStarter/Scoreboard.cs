@@ -11,15 +11,16 @@ namespace MonoGameWindowsStarter
 {
     public enum State
     {
-        One = 1,
-        OneIdle = 15,
+        toOne = 1,
+        One = 2,
 
-        Two = 2,
-        TwoIdle = 25,
+        toTwo = 3,
+        Two = 4,
 
-        Three = 3,
+        toThree = 5,
+        Three = 6,
 
-        Idle = 4
+        Idle = 7
     }
     public class Scoreboard
     {
@@ -49,7 +50,7 @@ namespace MonoGameWindowsStarter
 
         public void LoadContent()
         {
-            texture = game.Content.Load<Texture2D>("scoreboard");
+            texture = game.Content.Load<Texture2D>("newScoreboard");
         }
 
         public void Update(GameTime gameTime)
@@ -63,15 +64,36 @@ namespace MonoGameWindowsStarter
 
                 if (puck.score2 == 1)   
                 {
+                    state = State.toOne;
+                }
+
+                if (state == State.toOne)
+                {
                     state = State.One;
                 }
 
-                if (puck.score2 == 2)
+                if (state == State.One)
+                {
+                    if (puck.score2 == 2)
+                    {
+                        state = State.toTwo;
+                    }
+                }
+                
+                if (state == State.toTwo)
                 {
                     state = State.Two;
                 }
 
-                if (puck.score2 == 3)
+                if (state == State.Two)
+                {
+                    if (puck.score2 == 3)
+                    {
+                        state = State.toThree;
+                    }
+                }
+
+                if (state == State.toThree)
                 {
                     state = State.Three;
                 }
@@ -86,24 +108,42 @@ namespace MonoGameWindowsStarter
 
                 if (puck.score1 == 1)
                 {
-                    state = State.One;
-                    state = State.Idle;
+                    state = State.toOne;
                 }
 
-                if (puck.score1 == 2)
+                if (state == State.toOne)
+                {
+                    state = State.One;
+                }
+
+                if (state == State.One)
+                {
+                    if (puck.score1 == 2)
+                    {
+                        state = State.toTwo;
+                    }
+                }
+
+                if (state == State.toTwo)
                 {
                     state = State.Two;
                 }
 
-                if (puck.score1 == 3)
+                if (state == State.Two)
+                {
+                    if (puck.score1 == 3)
+                    {
+                        state = State.toThree;
+                    }
+                }
+
+                if (state == State.toThree)
                 {
                     state = State.Three;
                 }
             }
 
             if (state != State.Idle) timer += gameTime.ElapsedGameTime;
-            if (state != State.OneIdle) timer += gameTime.ElapsedGameTime;
-            if (state != State.TwoIdle) timer += gameTime.ElapsedGameTime;
 
             while (timer.TotalMilliseconds > ANIMATION_FRAMERATE)
             {
@@ -120,7 +160,7 @@ namespace MonoGameWindowsStarter
         {
             var source = new Rectangle(
                                         frame * FRAME_WIDTH,
-                                        (int)state % 4 * FRAME_HEIGHT,
+                                        (int)state % 7 * FRAME_HEIGHT,
                                         FRAME_WIDTH,
                                         FRAME_HEIGHT
                                         );
