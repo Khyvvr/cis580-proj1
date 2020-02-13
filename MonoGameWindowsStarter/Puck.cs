@@ -17,7 +17,7 @@ namespace MonoGameWindowsStarter
         Vector2 puckPos;
         Vector2 puckVel;
         SpriteBatch spriteBatch;
-        //SpriteFont spriteFont;
+        SpriteFont spriteFont;
         Random random = new Random();
         Collisions collisions = new Collisions();
         
@@ -29,7 +29,7 @@ namespace MonoGameWindowsStarter
         public int score1;
         public int score2;
 
-        Texture2D win1, win2;
+        Texture2D win1, win2, winColorRec, winRecBlack;
         public Rectangle p1win, p2win;
 
         BoundingRectangle boundary;
@@ -70,6 +70,8 @@ namespace MonoGameWindowsStarter
             texture = content.Load<Texture2D>("puck");
             win1 = content.Load<Texture2D>("player1win");
             win2 = content.Load<Texture2D>("player2win");
+            winColorRec = content.Load<Texture2D>("pixel");
+            winRecBlack = content.Load<Texture2D>("pixel");
 
             hitPaddle = content.Load<SoundEffect>("hitPaddle");
             hitWall = content.Load<SoundEffect>("hitWall");
@@ -77,7 +79,7 @@ namespace MonoGameWindowsStarter
             victory = content.Load<SoundEffect>("victory");
 
 
-            //spriteFont = content.Load<SpriteFont>("font");  //load font from content here
+            spriteFont = content.Load<SpriteFont>("font");  //load font from content here
         }
 
         public void Update (GameTime gameTime)
@@ -192,46 +194,24 @@ namespace MonoGameWindowsStarter
 
             if (score1 == 3)
             {
-                
-                // -- commented out for font testing and learning
-                spriteBatch.Begin();
-                spriteBatch.GraphicsDevice.Clear(Color.Black);
-
-                spriteBatch.Draw(win1, p1win, Color.AntiqueWhite);
-                victory.Play();
-                spriteBatch.End();
-                
-                
-
-                /* --TEST AT LAB COMPUTERS
                 //change win screen to use fonts here
                 spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
-                spriteBatch.DrawString(spriteFont, "Blue Player Wins!", new Vector2(200, 200), Color.Blue);
+                spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Blue);
+                spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
+                spriteBatch.DrawString(spriteFont, "Blue Player Wins!", new Vector2(500, 400), Color.Blue);
                 spriteBatch.End();
-                */
             }
 
             if (score2 == 3)
             {
-                
-                // -- commented out for font testing and learning --
-                spriteBatch.Begin();
-                spriteBatch.GraphicsDevice.Clear(Color.Black);
-
-                spriteBatch.Draw(win2, p2win, Color.AntiqueWhite);
-                victory.Play();
-                spriteBatch.End();
-                
-                
-
-                /* --TEST AT LAB COMPUTERS
                 //change win screen to use fonts here
                 spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
-                spriteBatch.DrawString(spriteFont, "Red Player Wins!", new Vector2(200, 100), Color.Red);
+                spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Red);
+                spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
+                spriteBatch.DrawString(spriteFont, "Red Player Wins!", new Vector2(500, 400), Color.Red);
                 spriteBatch.End();
-                */
             }
         }
     }

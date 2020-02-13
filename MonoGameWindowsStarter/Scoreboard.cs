@@ -35,8 +35,8 @@ namespace MonoGameWindowsStarter
 
 
         const int ANIMATION_FRAMERATE = 124;
-        const int FRAME_WIDTH = 51;
-        const int FRAME_HEIGHT = 51;
+        const int FRAME_WIDTH = 52;
+        const int FRAME_HEIGHT = 52;
 
         public Scoreboard(int x, int y, Game1 game, Puck puck, int player)
         {
