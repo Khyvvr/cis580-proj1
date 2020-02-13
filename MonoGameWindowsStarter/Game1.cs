@@ -66,8 +66,8 @@ namespace MonoGameWindowsStarter
 
             puck = new Puck(this);
 
-            blueScoreboard = new Scoreboard(825, 825, this, puck, 1);
-            redScoreboard = new Scoreboard(725, 825, this, puck, 2);
+            blueScoreboard = new Scoreboard(825, 26, this, puck, 1);
+            redScoreboard = new Scoreboard(725, 26, this, puck, 2);
 
             base.Initialize();
         }

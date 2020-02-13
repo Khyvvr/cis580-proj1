@@ -14,9 +14,9 @@ namespace MonoGameWindowsStarter
     {
         public bool Collides(BoundingRectangle a, BoundingRectangle b)
         {
-            return !(a.X + a.Width <= b.X       // a is to the left of b
-                || a.X + a.Width >= b.X + b.Width         // a is to the right of b
-                || a.Y + a.Height <= b.Y        // a is above b
+            return !(a.X + a.Width <= b.X                     // a is to the left of b
+                || a.X + a.Width >= b.X + b.Width            // a is to the right of b
+                || a.Y + a.Height <= b.Y                    // a is above b
                 || a.Y + a.Height >= b.X + b.Height);      // a is below b
         }
 
