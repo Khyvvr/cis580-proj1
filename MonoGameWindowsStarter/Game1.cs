@@ -33,8 +33,10 @@ namespace MonoGameWindowsStarter
 
         public ParticleSystem upperLeftFireworks;
         public ParticleSystem upperRightFireworks;
-        public ParticleSystem lowerLeftFireworks;
-        public ParticleSystem lowerRightFireworks;
+        public ParticleSystem upperBlueScore;
+        public ParticleSystem lowerBlueScore;
+        public ParticleSystem upperRedScore;
+        public ParticleSystem lowerRedScore;
         public Texture2D fireworkTexture;
 
 
@@ -92,26 +94,106 @@ namespace MonoGameWindowsStarter
             background = Content.Load<Texture2D>("background");
             fireworkTexture = Content.Load<Texture2D>("particle");
 
-            upperLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            upperBlueScore = new ParticleSystem(GraphicsDevice, 500, fireworkTexture);
+            upperBlueScore.SpawnPerFrame = 2;
+            lowerBlueScore = new ParticleSystem(GraphicsDevice, 500, fireworkTexture);
+            lowerBlueScore.SpawnPerFrame = 2;
+
+            upperRedScore = new ParticleSystem(GraphicsDevice, 500, fireworkTexture);
+            upperRedScore.SpawnPerFrame = 2;
+            lowerRedScore = new ParticleSystem(GraphicsDevice, 500, fireworkTexture);
+            lowerRedScore.SpawnPerFrame = 2;
+
+            upperBlueScore.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(150, 50);
+                particle.Velocity = 100 * new Vector2((float)random.NextDouble(), (float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.Blue;
+                particle.Scale = .5f;
+                particle.Life = 5.0f;
+            };
+
+            // Set the UpdateParticle method
+            upperBlueScore.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            lowerBlueScore.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(150, 850);
+                particle.Velocity = 100 * new Vector2((float)random.NextDouble(), -(float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.Blue;
+                particle.Scale = .5f;
+                particle.Life = 5.0f;
+            };
+
+            // Set the UpdateParticle method
+            lowerBlueScore.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            upperRedScore.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(1450, 50);
+                particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), (float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.IndianRed;
+                particle.Scale = .5f;
+                particle.Life = 5.0f;
+            };
+
+            // Set the UpdateParticle method
+            upperRedScore.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            lowerRedScore.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(1450, 850);
+                particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), -(float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.IndianRed;
+                particle.Scale = .5f;
+                particle.Life = 5.0f;
+            };
+
+            // Set the UpdateParticle method
+            lowerRedScore.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            upperLeftFireworks = new ParticleSystem(GraphicsDevice, 750, fireworkTexture);
             upperLeftFireworks.SpawnPerFrame = 4;
 
-            upperRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            upperRightFireworks = new ParticleSystem(GraphicsDevice, 750, fireworkTexture);
             upperRightFireworks.SpawnPerFrame = 4;
-
-            lowerLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
-            lowerLeftFireworks.SpawnPerFrame = 4;
-
-            lowerRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
-            lowerRightFireworks.SpawnPerFrame = 4;
 
             upperLeftFireworks.SpawnParticle = (ref Particle particle) =>
             {
-                particle.Position = new Vector2(200, 200);
+                particle.Position = new Vector2(350, 100);
                 particle.Velocity = 100 * new Vector2((float)random.NextDouble(), (float)random.NextDouble());
                 particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.White;
-                particle.Scale = 1f;
-                particle.Life = 1.0f;
+                particle.Color = Color.Gold;
+                particle.Scale = .75f;
+                particle.Life = 4.0f;
             };
 
             // Set the UpdateParticle method
@@ -125,54 +207,16 @@ namespace MonoGameWindowsStarter
 
             upperRightFireworks.SpawnParticle = (ref Particle particle) =>
             {
-                particle.Position = new Vector2(1400, 200);
+                particle.Position = new Vector2(1250, 100);
                 particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), (float)random.NextDouble());
                 particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.White;
-                particle.Scale = 1f;
-                particle.Life = 1.0f;
+                particle.Color = Color.Gold;
+                particle.Scale = .75f;
+                particle.Life = 4.0f;
             };
 
             // Set the UpdateParticle method
             upperRightFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
-            {
-                particle.Velocity += deltaT * particle.Acceleration;
-                particle.Position += deltaT * particle.Velocity;
-                particle.Scale -= deltaT;
-                particle.Life -= deltaT;
-            };
-
-            lowerLeftFireworks.SpawnParticle = (ref Particle particle) =>
-            {
-                particle.Position = new Vector2(200, 700);
-                particle.Velocity = 100 * new Vector2((float)random.NextDouble(), -(float)random.NextDouble());
-                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.White;
-                particle.Scale = 1f;
-                particle.Life = 1.0f;
-            };
-
-            // Set the UpdateParticle method
-            lowerLeftFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
-            {
-                particle.Velocity += deltaT * particle.Acceleration;
-                particle.Position += deltaT * particle.Velocity;
-                particle.Scale -= deltaT;
-                particle.Life -= deltaT;
-            };
-
-            lowerRightFireworks.SpawnParticle = (ref Particle particle) =>
-            {
-                particle.Position = new Vector2(1400, 700);
-                particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), -(float)random.NextDouble());
-                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
-                particle.Color = Color.White;
-                particle.Scale = 1f;
-                particle.Life = 1.0f;
-            };
-
-            // Set the UpdateParticle method
-            lowerRightFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
             {
                 particle.Velocity += deltaT * particle.Acceleration;
                 particle.Position += deltaT * particle.Velocity;
@@ -236,10 +280,12 @@ namespace MonoGameWindowsStarter
             blueScoreboard.Update(gameTime);
             redScoreboard.Update(gameTime);
 
+            upperBlueScore.Update(gameTime);
+            lowerBlueScore.Update(gameTime);
+            upperRedScore.Update(gameTime);
+            lowerRedScore.Update(gameTime);
             upperLeftFireworks.Update(gameTime);
             upperRightFireworks.Update(gameTime);
-            lowerLeftFireworks.Update(gameTime);
-            lowerRightFireworks.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -250,7 +296,7 @@ namespace MonoGameWindowsStarter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            //GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -274,6 +320,18 @@ namespace MonoGameWindowsStarter
 
             puck.Draw();
 
+            if (puck.score1 == 2)
+            {
+                upperBlueScore.Draw();
+                lowerBlueScore.Draw();
+            }
+
+            if (puck.score2 == 2)
+            {
+                upperRedScore.Draw();
+                lowerRedScore.Draw();
+            }
+        
             spriteBatch.End();
 
             base.Draw(gameTime);

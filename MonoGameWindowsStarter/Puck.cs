@@ -202,8 +202,6 @@ namespace MonoGameWindowsStarter
                 spriteBatch.DrawString(spriteFont, "Blue Player Wins!", new Vector2(500, 400), Color.Blue);
                 game.upperLeftFireworks.Draw();
                 game.upperRightFireworks.Draw();
-                game.lowerLeftFireworks.Draw();
-                game.lowerRightFireworks.Draw();
                 spriteBatch.End();
             }
 
@@ -217,8 +215,6 @@ namespace MonoGameWindowsStarter
                 spriteBatch.DrawString(spriteFont, "Red Player Wins!", new Vector2(500, 400), Color.Red);
                 game.upperLeftFireworks.Draw();
                 game.upperRightFireworks.Draw();
-                game.lowerLeftFireworks.Draw();
-                game.lowerRightFireworks.Draw();
                 spriteBatch.End();
             }
         }
