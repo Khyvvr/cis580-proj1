@@ -93,9 +93,20 @@ namespace MonoGameWindowsStarter
             fireworkTexture = Content.Load<Texture2D>("particle");
 
             upperLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            upperLeftFireworks.Emitter = new Vector2(100, 100);
+            upperLeftFireworks.SpawnPerFrame = 4;
+
             upperRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            upperRightFireworks.Emitter = new Vector2(100, 100);
+            upperRightFireworks.SpawnPerFrame = 4;
+
             lowerLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            lowerLeftFireworks.Emitter = new Vector2(100, 100);
+            lowerLeftFireworks.SpawnPerFrame = 4;
+
             lowerRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            lowerRightFireworks.Emitter = new Vector2(100, 100);
+            lowerRightFireworks.SpawnPerFrame = 4;
 
             upperLeftFireworks.SpawnParticle = (ref Particle particle) =>
             {
