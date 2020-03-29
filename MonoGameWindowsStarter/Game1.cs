@@ -180,6 +180,8 @@ namespace MonoGameWindowsStarter
                 particle.Life -= deltaT;
             };
 
+
+
             upperLeftFireworks = new ParticleSystem(GraphicsDevice, 750, fireworkTexture);
             upperLeftFireworks.SpawnPerFrame = 4;
 
@@ -188,12 +190,12 @@ namespace MonoGameWindowsStarter
 
             upperLeftFireworks.SpawnParticle = (ref Particle particle) =>
             {
-                particle.Position = new Vector2(350, 100);
+                particle.Position = new Vector2(200, 100);
                 particle.Velocity = 100 * new Vector2((float)random.NextDouble(), (float)random.NextDouble());
                 particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
                 particle.Color = Color.Gold;
-                particle.Scale = .75f;
-                particle.Life = 4.0f;
+                particle.Scale = 2.0f;
+                particle.Life = 6.0f;
             };
 
             // Set the UpdateParticle method
@@ -207,12 +209,12 @@ namespace MonoGameWindowsStarter
 
             upperRightFireworks.SpawnParticle = (ref Particle particle) =>
             {
-                particle.Position = new Vector2(1250, 100);
+                particle.Position = new Vector2(1400, 100);
                 particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), (float)random.NextDouble());
                 particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
                 particle.Color = Color.Gold;
-                particle.Scale = .75f;
-                particle.Life = 4.0f;
+                particle.Scale = 2.0f;
+                particle.Life = 6.0f;
             };
 
             // Set the UpdateParticle method
