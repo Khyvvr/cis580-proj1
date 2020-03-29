@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameWindowsStarter;
+using System;
 
 namespace MonoGameWindowsStarter
 {
@@ -13,6 +13,7 @@ namespace MonoGameWindowsStarter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Collisions collisions = new Collisions();
+        Random random = new Random();
 
         public playerNet blueNet;
         public playerNet redNet;
@@ -29,6 +30,12 @@ namespace MonoGameWindowsStarter
 
         public Scoreboard blueScoreboard;
         public Scoreboard redScoreboard;
+
+        public ParticleSystem upperLeftFireworks;
+        public ParticleSystem upperRightFireworks;
+        public ParticleSystem lowerLeftFireworks;
+        public ParticleSystem lowerRightFireworks;
+        public Texture2D fireworkTexture;
 
 
         Texture2D background;
@@ -83,6 +90,88 @@ namespace MonoGameWindowsStarter
 
             // TODO: use this.Content to load your game content here
             background = Content.Load<Texture2D>("background");
+            fireworkTexture = Content.Load<Texture2D>("particle");
+
+            upperLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            upperRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            lowerLeftFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+            lowerRightFireworks = new ParticleSystem(GraphicsDevice, 100, fireworkTexture);
+
+            upperLeftFireworks.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(200, 200);
+                particle.Velocity = 100 * new Vector2((float)random.NextDouble(), (float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.White;
+                particle.Scale = 1f;
+                particle.Life = 1.0f;
+            };
+
+            // Set the UpdateParticle method
+            upperLeftFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            upperRightFireworks.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(1400, 200);
+                particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), (float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.White;
+                particle.Scale = 1f;
+                particle.Life = 1.0f;
+            };
+
+            // Set the UpdateParticle method
+            upperRightFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            lowerLeftFireworks.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(200, 700);
+                particle.Velocity = 100 * new Vector2((float)random.NextDouble(), -(float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.White;
+                particle.Scale = 1f;
+                particle.Life = 1.0f;
+            };
+
+            // Set the UpdateParticle method
+            lowerLeftFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
+
+            lowerRightFireworks.SpawnParticle = (ref Particle particle) =>
+            {
+                particle.Position = new Vector2(1400, 700);
+                particle.Velocity = 100 * new Vector2(-(float)random.NextDouble(), -(float)random.NextDouble());
+                particle.Acceleration = 0.1f * new Vector2(0, (float)-random.NextDouble());
+                particle.Color = Color.White;
+                particle.Scale = 1f;
+                particle.Life = 1.0f;
+            };
+
+            // Set the UpdateParticle method
+            lowerRightFireworks.UpdateParticle = (float deltaT, ref Particle particle) =>
+            {
+                particle.Velocity += deltaT * particle.Acceleration;
+                particle.Position += deltaT * particle.Velocity;
+                particle.Scale -= deltaT;
+                particle.Life -= deltaT;
+            };
 
             blueNet.LoadContent(Content);
             redNet.LoadContent(Content);
@@ -139,6 +228,11 @@ namespace MonoGameWindowsStarter
             // update scoreboard here (make sure it's checking for score here and updating in class)
             blueScoreboard.Update(gameTime);
             redScoreboard.Update(gameTime);
+
+            upperLeftFireworks.Update(gameTime);
+            upperRightFireworks.Update(gameTime);
+            lowerLeftFireworks.Update(gameTime);
+            lowerRightFireworks.Update(gameTime);
 
             base.Update(gameTime);
         }

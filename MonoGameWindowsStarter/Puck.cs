@@ -197,9 +197,13 @@ namespace MonoGameWindowsStarter
                 //change win screen to use fonts here
                 spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
-                spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Blue);
-                spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
+                //spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Blue);
+                //spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
                 spriteBatch.DrawString(spriteFont, "Blue Player Wins!", new Vector2(500, 400), Color.Blue);
+                game.upperLeftFireworks.Draw();
+                game.upperRightFireworks.Draw();
+                game.lowerLeftFireworks.Draw();
+                game.lowerRightFireworks.Draw();
                 spriteBatch.End();
             }
 
@@ -208,9 +212,13 @@ namespace MonoGameWindowsStarter
                 //change win screen to use fonts here
                 spriteBatch.Begin();
                 spriteBatch.GraphicsDevice.Clear(Color.Black);
-                spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Red);
-                spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
+                //spriteBatch.Draw(winColorRec, new Rectangle(200, 200, 1200, 500), Color.Red);
+                //spriteBatch.Draw(winRecBlack, new Rectangle(225, 225, 1150, 450), Color.Black);
                 spriteBatch.DrawString(spriteFont, "Red Player Wins!", new Vector2(500, 400), Color.Red);
+                game.upperLeftFireworks.Draw();
+                game.upperRightFireworks.Draw();
+                game.lowerLeftFireworks.Draw();
+                game.lowerRightFireworks.Draw();
                 spriteBatch.End();
             }
         }
