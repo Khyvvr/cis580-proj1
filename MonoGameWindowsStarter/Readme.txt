@@ -32,3 +32,12 @@ Furthermore, the nets will also spawn with a different speed every time the game
 
 
 
+///
+///
+///
+CIS 580 PROJECT 6 DETAILS:
+I have added a Particle System to my first project because I figured the addition of winning fireworks and heating up attributes would be more amusing than anything I was currently attempting to work on.
+Therefore, when either side comes within 1 point of winning, there is a particle effect on their side signifying so.
+Also, when either side wins the game,  there is a new particle effect to make the win screen more fun.
+
+While I wanted to give effects to the moving assets like the puck and paddles I didn't quite find the time for it and hope this is able to demonstrate the particle effect unit.
